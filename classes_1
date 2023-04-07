@@ -1,0 +1,18 @@
+Classes we can consdier:
+I will add the attributes as well.
+- dentalCompany: name, branches 
+- dentalBranch: 
+- service
+- staff
+- patient 
+- appointment
+- payment 
+- person
+- managers
+- receptionists
+- hygienists
+- dentists
+- cleaning
+- implants
+- crowns
+- fillings
