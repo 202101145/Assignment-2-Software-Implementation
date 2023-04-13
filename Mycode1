@@ -1,0 +1,245 @@
+class DentalCompany:
+    def __init__(self, name):
+        self.name = name
+        self.branches = []
+
+    def add_branch(self, branch):
+        self.branches.append(branch)
+
+    def get_branches(self):
+        return self.branches
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+class Dentalbranch:
+    def __init__(self, address, phone_number, manager):
+        self.address = address
+        self.phone_number = phone_number
+        self.manager = manager
+        self.services = []
+        self.staff = []
+        self.patients = []
+
+    def add_service(self, service):
+        self.services.append(service)
+
+    def get_services(self):
+        return self.services
+
+    def add_staff(self, staff):
+        self.staff.append(staff)
+
+    def get_staff(self):
+        return self.staff
+
+    def add_patient(self, patient):
+        self.patients.append(patient)
+
+    def get_patients(self):
+        return self.patients
+
+    def set_address(self, address):
+        self.address = address
+
+    def get_address(self):
+        return self.address
+
+    def set_phone_number(self, phone_number):
+        self.phone_number = phone_number
+
+    def get_phone_number(self):
+        return self.phone_number
+
+    def set_manager(self, manager):
+        self.manager = manager
+
+    def get_manager(self):
+        return self.manager
+from enum import Enum
+class ServiceType(Enum):
+    cleaning=1
+    implants=2
+    crowns= 3
+    fillings=4
+class Service:
+    def __init__(self, name, cost, serviceType):
+        self.name = name
+        self.cost = cost
+        self.serviceType = serviceType
+
+    def setName(self, name):
+        self.name = name
+
+    def getName(self):
+        return self.name
+
+    def setCost(self, cost):
+        self.cost = cost
+
+    def getCost(self):
+        return self.cost
+
+    def setServiceType(self, serviceType):
+        self.serviceType= serviceType
+
+    def getServiceType(self):
+        return self.serviceType
+
+class Person:
+    def __init__(self, name, email, phoneNumber):
+        self.name=name
+        self.email=email
+        self.phoneNumber= phoneNumber
+    def setName(self, name):
+        self.name = name
+    def getName(self):
+        return self.name
+    def setEmail(self, email):
+        self.email = email
+    def getEmail(self):
+        return self.email    
+    def setPhoneNumber(self, phoneNumber):
+        self.phoneNumber = phoneNumber
+    def getPhoneNumber(self):
+        return self.phoneNumber  
+
+from enum import Enum
+class StaffRole(Enum):
+    managers=1
+    receptionists=2
+    hygienists=3
+    dentists=4
+
+class Staff(Person):
+    def __init__(self, name, email, phoneNumber, staffRole, hireDate):
+        super().__init__(name, email, phoneNumber)
+        self.staffRole= staffRole
+        self.hireDate= hireDate
+
+    def setStaffRole(self, staffRole):
+        self.staffRole = staffRole
+
+    def getStaffRole(self):
+        return self.staffRole
+
+    def setHireDate(self, hireDate):
+        self.hireDate = hireDate
+
+    def getHireDate(self):
+        return self.hireDate
+
+class Patient(Person):
+    def __init__(self, name, email, phoneNumber, patientID):
+        super().__init__(name, email, phoneNumber)
+        self.patientID = patientID
+        self.appointments = []
+
+    def setPatientID(self, patientID):
+        self.patientID = patientID
+
+    def getPatientID(self):
+        return self.patientID
+
+    def add_appointment(self, appointment):
+        self.appointments.append(appointment)
+
+    def get_appointments(self):
+        return self.appointments
+
+class Appointment:
+    def __init__(self, dentistName, date, time, service=[]):
+        self.dentistName= dentistName
+        self.date = date
+        self.time = time
+        self.service = service
+        self.payment = None
+
+    def setDentistName(self, dentistName):
+        self.dentistName = dentistName
+    
+    def getDentistName(self):
+        return self.dentistName
+
+    def setDate(self, date):
+        self.date = date
+
+    def getDate(self):
+        return self.date
+
+    def setTime(self, time):
+        self.time = time
+
+    def getTime(self):
+        return self.time
+
+    def setService(self, service):
+        self.service = service
+
+    def getService(self):
+        return self.service
+    def checkout(self):
+        total_cost = self.service.cost
+        # calculate total cost based on additional services or procedures
+        vat = 0.05 * total_cost
+        final_cost = total_cost + vat
+        self.payment = Payment(final_cost)
+        return self.payment.get_receipt()
+
+from enum import Enum
+class PaymentMethod(Enum):
+    Card=1
+    Cash=2
+
+class Payment:
+    def __init__(self, amount, date, paymentMethod, status="unpaid"):
+        self.amount = amount
+        self.date = date
+        self.paymentMethod = paymentMethod
+        self.status = status
+    
+    def process_payment(self, paymentMethod):
+        self.paymentMethod = paymentMethod
+        self.status = "paid in full"
+    
+    def get_receipt(self):
+        receipt = "Payment receipt:\n"
+        receipt += f"Amount paid: {self.amount}\n"
+        receipt += f"Payment method: {self.method}\n"
+        receipt += f"Payment status: {self.status}\n"
+        return receipt
+    # Getter method for amount
+    def getAmount(self):
+        return self.amount
+    
+    # Setter method for amount
+    def setAmount(self, amount):
+        self.amount = amount
+        
+    # Getter method for date
+    def getDate(self):
+        return self.date
+    
+    # Setter method for date
+    def setDate(self, date):
+        self.date = date
+    
+    # Getter method for paymentMethod
+    def getPaymentMethod(self):
+        return self.paymentMethod
+    
+    # Setter method for paymentMethod
+    def setPaymentMethod(self, paymentMethod):
+        self.paymentMethod = paymentMethod
+        
+    # Getter method for status
+    def getStatus(self):
+        return self.status
+    
+    # Setter method for status
+    def setStatus(self, status):
+        self.status = status
+
