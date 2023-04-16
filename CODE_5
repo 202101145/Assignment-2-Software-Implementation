@@ -1,0 +1,272 @@
+#Define a class called "DentalCompany" with its instance variables 
+class DentalCompany:
+    def __init__(self, companyName): # Define the constructor method for the class
+        # Set the instance variables for each object of the class
+        self.companyName = companyName # Set the name attribute
+        self.branches = []# initialize an empty list for branches 
+
+    def setBranch(self, branch): # method to add a new branch to the company
+        self.branches.append(branch)  
+    def getBranches(self): # method to get all  branches of the company
+        return self.branches
+    def setCompanyName(self, companyName): # method to set the company name
+        self.companyName = companyName
+    def getCompanyName(self): # method to get the company name
+        return self.companyName 
+    def displayInfo(self): #function to display all info
+        print(f"Dental Company: {self.companyName}")
+        print("Branches:")
+        for branch in self.branches:
+            branch.displayInfo()
+# Define a class called "Dentalbranch" with its instance variables 
+class Dentalbranch:
+    def __init__(self, address, phoneNumber, manager, services=None, staff=None, patients=None): # Define the constructor method for the class
+        # Set the instance variables for each object of the class
+        self.address = address # Set the address attribute
+        self.phoneNumber = phoneNumber # Set the phoneNumber attribute
+        self.manager = manager# Set the manager attribute
+        self.services = services if services is not None else [] # Set the services to an empty list if no value is passed, otherwise set it to the value passed
+        self.staff = staff if staff is not None else [] # Set the staff to an empty list if no value is passed, otherwise set it to the value passed
+        self.patients = patients if patients is not None else [] # Set the patients to an empty list if no value is passed, otherwise set it to the value passed
+
+    def setService(self, service): # method to add a new service to the branch
+        self.services.append(service)
+    def getServices(self): # method to get all services of the branch
+        return self.services
+    def setStaff(self, staff): # method to add a new staff member to the branch
+        self.staff.append(staff)
+    def getStaff(self): # method to get all staff members of the branch
+        return self.staff
+    def setPatient(self, patient):# method to add a new patient to the branch
+        if patient not in self.patients:
+            self.patients.append(patient)
+            patient.setBranch(self)
+    def getPatients(self): # method to get all patients of the branch
+        return self.patients
+    def setAddress(self, address):  # method to set the branch address
+        self.address = address
+    def getAddress(self): # method to get the branch address
+        return self.address
+    def setPhoneNumber(self, phoneNumber): # method to set the branch phone number
+        self.phoneNumber = phoneNumber
+    def getPhoneNumber(self): # method to get the branch phone number
+        return self.phoneNumber
+    def setManager(self, manager): # method to set the branch manager
+        self.manager = manager
+    def getManager(self): # method to get the branch manager
+        return self.manager
+    def displayInfo(self):
+        print(f"\nBranch Info:\nAddress: {self.address}\nPhone number: {self.phoneNumber}\nManager: {self.manager}")
+        print("Services:")
+        for service in self.services:
+            service.displayInfo()
+        print("Staff members:")
+        for staff_member in self.staff:
+            staff_member.displayInfo()
+        print("Patients:")
+        for patient in self.patients:
+            patient.displayInfo()
+
+# Importing the Enum class from the enum module
+from enum import Enum
+class ServiceType(Enum): # Define an enum class called "ServiceType" for dental services
+    cleaning=1
+    implants=2
+    crowns= 3
+    fillings=4
+
+class Service: # Define a class called "Service" with its instance variables 
+    def __init__(self, name, cost, serviceType): # Define the constructor method for the class
+        # Set the instance variables for each object of the class
+        self.name = name # Set the name attribute
+        self.cost = cost # Set the cost attribute
+        self.serviceType = serviceType # Set the serviceType attribute
+
+    def setName(self, name): # method to set the service name
+        self.name = name
+    def getName(self): # method to get the service name
+        return self.name
+    def setCost(self, cost): # method to set the service cost
+        self.cost = cost
+    def getCost(self): # method to get the service cost
+        return self.cost
+    def setServiceType(self, serviceType):# method to set the service type
+        self.serviceType= serviceType
+    def getServiceType(self): # method to get the service type
+        return self.serviceType
+    def displayInfo(self): #function to display all info
+        print('Name =',self.name,' ,Cost=',self.cost,' ,ServiceType=',self.serviceType)
+
+class Person: # Define a Python class called "Person" with its instance variables
+    def __init__(self, name, email, phoneNumber): # Define the constructor method for the class
+        # Set the instance variables for each object of the class
+        self.name=name # Set the name attribute
+        self.email=email # Set the email attribute
+        self.phoneNumber= phoneNumber # Set the phoneNumber attribute
+
+    def setName(self, name): # Define a method to set the name instance variable
+        self.name = name
+    def getName(self): # Define a method to get the name instance variable
+        return self.name    
+    def setEmail(self, email): # Define a method to set the email instance variable
+        self.email = email
+    def getEmail(self): # Define a method to get the email instance variable
+        return self.email
+    def setPhoneNumber(self, phoneNumber): # Define a method to set the phone number instance variable
+        self.phoneNumber = phoneNumber
+    def getPhoneNumber(self): # Define a method to get the phone number instance variable
+        return self.phoneNumber
+    def displayInfo(self): #function to display all info
+        #print('Name =',self.name,' ,Email=',self.email,' ,PhoneNumber=',self.phoneNumber)
+        print(f"\nName: {self.name}\nEmail: {self.email}\nPhoneNumbe: {self.phoneNumber}")
+# Importing the Enum class from the enum module
+from enum import Enum
+class StaffRole(Enum): # Defining an enumeration called StaffRole
+    manager = 1
+    receptionist = 2
+    hygienist = 3
+    dentist = 4
+
+class Staff(Person): # Defining a Staff class that inherits from the Person class
+    def __init__(self, name, email, phoneNumber, staffRole): # Define the constructor method for the class
+        # Calling the constructor of the parent class (Person) and passing name, email, and phone number
+        super().__init__(name, email, phoneNumber)
+        # Set the instance variables for each object of the class
+        self.staffRole = staffRole # Set the staffRole attribute
+        self.branch = None # Initialize the branch attribute to None
+
+    def setStaffRole(self, staffRole): # Method to set the staff role of the Staff class
+        self.staffRole = staffRole  
+    def getStaffRole(self):# Method to get the staff role of the Staff class
+        return self.staffRole
+    def setBranch(self, branch):  # Method to set the branch of the Staff class
+        self.branch = branch
+    def getBranch(self): # Method to get the branch of the Staff class
+        return self.branch
+    def displayInfo(self): #function to display all info
+        Person.displayInfo(self) #refer to the parent function 
+        print('StaffRole=',self.staffRole, ',Branches=',self.branch)
+class Patient(Person): # Defining a Patient class that inherits from the Person class
+    def __init__(self, name, email, phoneNumber, patientID, appointment=None): # Define the constructor method for the class
+        # Calling the constructor of the parent class (Person) and passing name, email, and phone number
+        super().__init__(name, email, phoneNumber)
+        # Set the instance variables for each object of the class
+        self.patientID = patientID # Set the patientID attribute
+        self.branches = []# initialize an empty list for branches 
+        self.appointment = appointment if appointment is not None else [] # initialize an empty list for appointments 
+  
+    def setPatientID(self, patientID): # Method to set the patient ID of the Patient class
+        self.patientID = patientID   
+    def getPatientID(self): # Method to get the patient ID of the Patient class
+        return self.patientID   
+    def setBranch(self, branch): # Method to set the branch of the Patient class
+        self.branches.append(branch)
+        branch.setPatient(self)
+    def getBranches(self): # Method to get the Branches list of the Patient class
+        return self.branches
+    def setAppointment(self, appointment): # Method to add an appointment to the appointments list of the Patient class
+        #appointment = Appointment(self, dentistName, date, time, service=[]) # create new appointment instance
+        self.appointment.append(appointment)  # add appointment to patient's list 
+    def getAppointment(self): # Method to get the appointments list of the Patient class
+        return self.appointment
+    def displayInfo(self): #function to display all info
+        print("Patient Info:")
+        Person.displayInfo(self) #refer to the parent function     
+        print(f"\nID: {self.patientID}")
+        print("Appointments:")
+        for appointment in self.appointment:
+            appointment.displayInfo()  
+         
+                    #Person.displayInfo(self) #refer to the parent function
+        #print('PatientID=',self.patientID, ',Branches=',self.branches, ',Appointments=',self.appointments)
+class Appointment: # Define a class Appointment with its instance variables
+    def __init__(self, dentistName, date, time, service=None): # Define the constructor method for the class
+        # Set the instance variables for each object of the class
+        self.dentistName = dentistName # Set the dentist name attribute
+        self.date = date # Set the date attribute
+        self.time = time # Set the time attribute
+        self.service = service if service is not None else [] # Set the service attribute with an optional default value of an empty list
+        self.payment = None # Initialize the payment attribute to None
+
+    def setDentistName(self, dentistName): # Method to set the dentist name
+        self.dentistName = dentistName
+    def getDentistName(self):# Method to get the dentist name
+        return self.dentistName
+    def setDate(self, date):# Method to set the date
+        self.date = date
+    def getDate(self): # Method to get the date
+        return self.date
+    def setTime(self, time): # Method to set the time
+        self.time = time
+    def getTime(self): # Method to get the time
+        return self.time
+    def setService(self, service): # Method to set the service
+        self.service = service
+    def getService(self): # Method to get the service
+        return self.service
+    def displayInfo(self): #function to display all info
+        print(f"\nAppointment Info:\nDentistName: {self.dentistName}\nDate: {self.date}\nTime: {self.time}")
+        print("Services:")
+        for service in self.service:
+            service.displayInfo()        
+        #print('DentistName =',self.dentistName,' ,Patient=',self.patient,' ,Date=',self.date, ' ,Time=',self.time,' ,Service=',self.service, ' ,Payment=',self.payment)   
+    def checkout(self):# Method to calculate the total cost of the appointment and create a payment object
+        total_cost = 0
+        for s in self.service:
+          total_cost += s.cost
+        # calculate total cost based on additional services or procedures
+        vat = 0.05 * total_cost
+        final_cost = total_cost + vat
+        self.payment = Payment(final_cost, self.date, PaymentMethod.Card)
+        return self.payment.getReceipt()
+
+from enum import Enum
+# Define an enumeration class for the payment method
+class PaymentMethod(Enum):
+    Card = 1
+    Cash = 2
+# Define an enumeration class for the payment status
+class PaymentStatus(Enum):
+    UNPAID = 1
+    PAID_IN_FULL = 2
+
+# Define a class Payment with its instance variables
+class Payment:
+    def __init__(self, amount, date, paymentMethod,  status=PaymentStatus.UNPAID): # Define the constructor method for the class
+        # Set the instance variables for each object of the class
+        self.amount = amount # Set the amount attribute
+        self.date = date # Set the date attribute
+        self.paymentMethod = PaymentMethod(paymentMethod) # Set the payment method attribute
+        self.status = PaymentStatus(status) # Set the status attribute with an optional default value of "unpaid"
+    
+    # Method to process the payment
+    def processPayment(self, paymentMethod):
+        self.paymentMethod = paymentMethod
+        self.status = PaymentStatus.PAID_IN_FULL
+    
+    # Method to get the payment receipt
+    def getReceipt(self):
+        receipt = "Payment receipt:\n"
+        receipt += f"Date: {self.date}\n"
+        receipt += f"Amount paid: {self.amount}\n"
+        receipt += f"Payment method: {self.paymentMethod}\n"
+        receipt += f"Payment status: {self.status}\n"
+        return receipt
+    def getAmount(self): # Getter method for amount
+        return self.amount
+    def setAmount(self, amount): # Setter method for amount
+        self.amount = amount
+    def getDate(self): # Getter method for date
+        return self.date
+    def setDate(self, date): # Setter method for date
+        self.date = date
+    def getPaymentMethod(self): # Getter method for paymentMethod
+        return self.paymentMethod
+    def setPaymentMethod(self, paymentMethod): # Setter method for paymentMethod
+        self.paymentMethod = paymentMethod
+    def getStatus(self): # Getter method for status
+        return self.status
+    def setStatus(self, status): # Setter method for status
+        self.status = status
+    def displayInfo(self): #function to display all info
+        print('Amount =',self.amount,' ,Date=',self.date, ' ,paymentMethod=',self.paymentMethod,' ,Status=',self.status) 
