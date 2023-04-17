@@ -1,0 +1,33 @@
+# Create a DentalCompany object
+company = DentalCompany("Bright Smiles")
+company.displayInfo()
+#Create staff members
+dentist1 = Staff("John Smith", "john@example.com", "0507478344", StaffRole.dentist.name, branch="Al Rashidiya 1")
+hygienist1 = Staff("Jane Doe", "jane@example.com", "0506467433" ,StaffRole.hygienist.name, branch="Al Rashidiya 1")
+manager1 = Staff("Farah Mohammed", "Farah@example.com", "0507878344", StaffRole.manager.name, branch="Al Rashidiya 1")
+receptionist1= Staff("Zahra Mohammed", "Zahra@example.com", "0503459100", StaffRole.receptionist.name, branch="Al Rashidiya 1")
+dentist2 = Staff("Ameen Salem", "Ameen@example.com", "0507478344", StaffRole.dentist.name, "Al Hamidiya 1")
+hygienist2 = Staff("Fatima Khaled", "Fatima@example.com", "0506467433" ,StaffRole.hygienist.name, "Al Hamidiya 1")
+manager2 = Staff("Mohammed Khalied", "Mohammed@example.com", "0563421788", StaffRole.manager.name, "Al Hamidiya 1")
+receptionist2= Staff("Taif Obaid", "Taif@example.com", "0521237866", StaffRole.receptionist.name, "Al Hamidiya 1")
+# Add some services to the branch
+service1 = Service("Cleaning", 100, ServiceType.cleaning.name)
+service2 = Service("Implants", 1000, ServiceType.implants.name)
+service3=Service("crowns", 2000, ServiceType.crowns.name)
+service4=Service("fillings", 500, ServiceType.fillings.name)
+#patients
+patient1 = Patient("Alice Smith", "alice@example.com", "0506781233", "200346F55")
+patient2 = Patient("Bob Jones", "bob@example.com", "0556463877", "200156F33")
+patient3 = Patient("Reem Salem", "Reem@example.com", "0527463877", "200843R11")
+# Create two Dentalbranch objects
+branch1 = Dentalbranch("Al Rashidiya 1", "0507478344", "Dr. Smith",services=[service1, service2, service3, service4],staff=[dentist1,hygienist1, manager1, receptionist1] ,patients=[patient1,patient2])
+branch2 = Dentalbranch("Al Hamidiya 1", "0506777342", "Dr. Brown",services=[service1, service2, service3, service4],staff=[dentist2,hygienist2, manager2, receptionist2] ,patients=[patient1,patient3])
+# Add the two branches to the company
+company.setBranch(branch1)
+company.setBranch(branch2)
+# Get all the branches of the company
+branches = company.getBranches()
+# Print the details of each branch
+for branch in branches:
+  branch.displayInfo()
+  print("-----------")
