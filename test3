@@ -1,0 +1,10 @@
+# create some services 
+service1 = Service("Cleaning", 100, ServiceType.cleaning.name)
+service2 = Service("Implants", 1000, ServiceType.implants.name)
+# create a new patient object
+new_patient = Patient("Alice Smith", "alice@example.com", "0506781233", "200346F55")
+# create a new appointment object
+new_appointment = Appointment("Khaled", date='2023-05-01', time='10:00 AM', service=[service1, service2])
+# add the new appointment to the patient
+new_patient.setAppointment(new_appointment)
+new_patient.displayInfo()
