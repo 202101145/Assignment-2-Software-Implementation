@@ -1,0 +1,16 @@
+from datetime import time,date
+# Create an instance of the Appointment class
+appointment = Appointment("Dr. John Doe", date(2023, 4, 16), time(10,0))
+
+# Add a service to the appointment
+service1 = Service("Cleaning", 100, ServiceType.cleaning.name)
+appointment.setService([service1])
+# Display the appointment information
+appointment.displayInfo()
+# Checkout the appointment and process the payment
+receipt = appointment.checkout()
+print(receipt)
+# Process the payment after completion of service
+payment = appointment.payment
+payment.processPayment(PaymentMethod.Cash)
+print(payment.getReceipt())
