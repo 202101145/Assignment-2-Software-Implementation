@@ -1,0 +1,31 @@
+# Create a Dentalbranch object
+branch = Dentalbranch("Al Rashidiya 1", "0507478344", "Dr. Smith")
+# Create staff members
+dentist1 = Staff("John Smith", "john@example.com", "0507478344", StaffRole.dentist.name, branch="Al Rashidiya 1")
+hygienist1 = Staff("Jane Doe", "jane@example.com", "0506467433" ,StaffRole.hygienist.name, branch="Al Rashidiya 1")
+manager1 = Staff("Farah Mohammed", "Farah@example.com", "0507878344", StaffRole.manager.name, branch="Al Rashidiya 1")
+receptionist1= Staff("Zahra Mohammed", "Zahra@example.com", "0503459100", StaffRole.receptionist.name, branch="Al Rashidiya 1")
+# Add staff members to the branch
+branch.setStaff(dentist1)
+branch.setStaff(hygienist1)
+branch.setStaff(manager1)
+branch.setStaff(receptionist1)
+# Create some Patient objects
+patient1 = Patient("Alice Smith", "alice@example.com", "0506781233", "200346F55")
+patient2 = Patient("Bob Jones", "bob@example.com", "0556463877", "200156F33")
+# Add the patients to the branch
+branch.setPatient(patient1)
+branch.setPatient(patient2)
+# Add some services to the branch
+service1 = Service("Cleaning", 100, ServiceType.cleaning.name)
+service2 = Service("Implants", 1000, ServiceType.implants.name)
+service3=Service("crowns", 2000, ServiceType.crowns.name)
+service4=Service("fillings", 500, ServiceType.fillings.name)
+# Add the services to the branch
+branch.setService(service1)
+branch.setService(service2)
+branch.setService(service3)
+branch.setService(service3)
+# Get all the staff members of the branch
+#staff = branch.getStaff()
+branch.displayInfo()
